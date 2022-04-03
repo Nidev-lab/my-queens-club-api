@@ -4,7 +4,7 @@ const validateEmail = async(email) => {
   const isEmail = await User.findOne({email})
 
   if (isEmail) {
-    throw new Error(`El email ${email} ya existe`)
+    throw new Error(`Algo salió mal`)
   }
 }
 
@@ -12,7 +12,7 @@ const validateUserName = async(userName) =>{
   const isUserName = await User.findOne({userName})
 
   if(isUserName) {
-    throw new Error(`El Nombre de Usuario ${userName} ya existe`)
+    throw new Error(`Algo salió mal`)
   }
 }
 
