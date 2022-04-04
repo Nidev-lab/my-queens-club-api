@@ -4,7 +4,7 @@ const { body } = require('express-validator');
 const { createUser } = require('../controllers/users');
 const { validateEmail, validateUserName } = require('../helpers/validation')
 
-route.post('/create-users',
+route.post('/',
 body('email').trim().escape().isEmail().not().isEmpty(),
 body('email').custom(validateEmail),
 body('userName').trim().escape().isAlphanumeric().isLength({min: 4, max: 10}).not().isEmpty(),

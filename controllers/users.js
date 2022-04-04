@@ -25,8 +25,8 @@ const createUser = async(req, res) =>{
     newUser.password = bcrypt.hashSync(password, salt)
 
     await newUser.save()
-      res.json(`User created successfully`)
-    } 
+    res.json(`User created successfully`)
+  } 
   catch(error){
     return res.status(404).json({
       message: "Cannot create user"
