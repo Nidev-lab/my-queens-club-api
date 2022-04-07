@@ -33,6 +33,18 @@ const createUser = async(req, res) =>{
   }
 }
 
+const getUser = async (req, res) => {
+  try {
+    const user = await User.find({})
+    res.json(user)
+  }
+  catch (error) {
+    return res.status(404).json({
+      mensaje: "Cannot found any user"
+    })
+  }
+}
+
 const deleteUser = async (req, res) => {
   const { id } = req.body
   try {
@@ -55,4 +67,4 @@ const deleteUser = async (req, res) => {
   }
 }
 
-module.exports = { createUser, deleteUser }
+module.exports = { createUser, getUser, deleteUser }
