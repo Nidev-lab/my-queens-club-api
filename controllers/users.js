@@ -3,8 +3,7 @@ const User = require('../models/users')
 const bcrypt = require('bcrypt')
 
 const createUser = async(req, res) =>{
-  
-  const errors = validationResult(req);
+  const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({errors: 'Algo salió mal'})
   }
@@ -34,4 +33,26 @@ const createUser = async(req, res) =>{
   }
 }
 
-module.exports = { createUser }
+const deleteUser = async (req, res) => {
+  const { id } = req.body
+  try {
+    const user = await User.findOneAndDelete({ _id: id })
+    
+    if (user) {
+      return res.status(200).json({
+        mensaje: "User deleted succefully!",
+      })
+    }
+
+    return res.status(404).json({
+      mensaje: "User not found!",
+    })
+  } catch (error) {
+    return res.status(404).json({
+      message: "Cannot delete user",
+      error
+    })
+  }
+}
+
+module.exports = { createUser, deleteUser }

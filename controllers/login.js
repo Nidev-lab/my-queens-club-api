@@ -1,9 +1,9 @@
+require('dotenv').config()
 const bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken")
 const { validationResult } = require('express-validator')
 const { userNameOrEmail } = require('../helpers/loginValidate')
 const token_secret = process.env.TOKEN_SECRET
-require('dotenv').config()
 
 const login = async (req, res) => {
   const { email, userName, password } = req.body

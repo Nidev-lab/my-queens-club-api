@@ -1,8 +1,9 @@
-const { Router } = require('express');
-const route = Router();
-const { body } = require('express-validator');
-const { createUser } = require('../controllers/users');
-const { validateEmail, validateUserName } = require('../helpers/validation')
+const { Router } = require('express')
+const route = Router()
+const { body } = require('express-validator')
+const { createUser, deleteUser } = require('../controllers/users');
+const { validateEmail, validateUserName } = require('../helpers/validation');
+const { jwtValidator } = require('../middleware/jwt');
 
 route.post('/',
 body('email').trim().escape().isEmail().not().isEmpty(),
@@ -14,4 +15,7 @@ body('lastName').trim().escape().isAlpha('es-ES', {ignore: ' '}).not().isEmpty()
 body('password').not().isEmpty().isStrongPassword({minSymbols: 0}),
 createUser)
 
-module.exports = route;
+route
+  .delete('/', jwtValidator, deleteUser)
+
+module.exports = route
