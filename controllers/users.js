@@ -33,10 +33,10 @@ const createUser = async(req, res) =>{
   }
 }
 
-const getUser = async (req, res) => {
+const getUsers = async (req, res) => {
   try {
-    const user = await User.find({})
-    res.json(user)
+    const users = await User.find({})
+    res.status(200).json(users)
   }
   catch (error) {
     return res.status(404).json({
@@ -67,4 +67,4 @@ const deleteUser = async (req, res) => {
   }
 }
 
-module.exports = { createUser, getUser, deleteUser }
+module.exports = { createUser, getUsers, deleteUser }

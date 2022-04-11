@@ -1,12 +1,12 @@
 const { Router } = require('express')
 const route = Router()
 const { body } = require('express-validator')
-const { createUser, deleteUser, getUser } = require('../controllers/users');
+const { createUser, deleteUser, getUsers } = require('../controllers/users');
 const { validateEmail, validateUserName } = require('../helpers/validation');
 const { jwtValidator } = require('../middleware/jwt');
 
 route
-  .get('/', jwtValidator, getUser)
+  .get('/', jwtValidator, getUsers)
 
 route
   .post('/',
