@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 const connectionDB = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/MQC')
+    await mongoose.connect(process.env.MQCDB)
     console.log('Conexión Exitosa');
   } catch (error) {
     console.log(error);

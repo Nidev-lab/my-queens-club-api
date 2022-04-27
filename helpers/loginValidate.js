@@ -1,15 +1,12 @@
 const User = require('../models/users')
 
-const userNameOrEmail = async (email, userName) => {
-  if (email) {
-    const user = await User.findOne({ email })
+const userNameOrEmail = async (userName) => {
+  const user = await User.findOne({ userName })
+  if (user === null) {
+    const user = await User.findOne({ email: userName })
     return user
-  }
-
-  if (userName) {
-    const user = await User.findOne({ userName })
-    return user
-  }
+  } 
+  return user
 }
 
 module.exports = { userNameOrEmail }
