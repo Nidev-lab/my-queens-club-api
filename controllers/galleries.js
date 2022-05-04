@@ -7,9 +7,9 @@ const createGalleries = async(req, res) =>{
     return res.status(400).json({errors: 'Algo salió mal'})
   }
   try{
-    const { nameGallery, price, coverPhotoGallery, photos } = req.body
+    const { galleryName, price, coverPhotoGallery, photos } = req.body
     const newGallery = new Galleries({
-      nameGallery,
+      galleryName,
       coverPhotoGallery,
       price,
       photos
