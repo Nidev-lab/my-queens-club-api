@@ -10,7 +10,7 @@ const login = async (req, res) => {
 
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: 'Algo salió mal' })
+    return res.status(400).json({ errors: 'Algo salió mal', status: 400 })
   }
   
   const userData = await userNameOrEmail(user)
@@ -18,7 +18,7 @@ const login = async (req, res) => {
   if (!userData) {
     res
       .status(400)
-      .send({ mensaje: "Algo salio mal" })
+      .send({ mensaje: "Algo salio mal", status: 400 })
     return;
   }
 
@@ -33,7 +33,7 @@ const login = async (req, res) => {
         accessToken: accessToken,
       })
     } else {
-      res.status(404).json({ mensaje: "Error: credenciales incorrectas" })
+      res.status(400).json({ mensaje: "Error: credenciales incorrectas", status: 400 })
     }
   } catch (error) {
     console.error(error)
