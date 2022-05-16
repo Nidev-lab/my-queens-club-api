@@ -1,4 +1,5 @@
 const { validationResult } = require('express-validator')
+const Queen = require('../models/queen')
 const Galleries = require('../models/galleries')
 
 const createGalleries = async(req, res) =>{
@@ -7,12 +8,16 @@ const createGalleries = async(req, res) =>{
     return res.status(400).json({errors: 'Algo salió mal'})
   }
   try{
-    const { galleryName, price, coverPhotoGallery, photos } = req.body
+    const { galleryName, price, coverPhotoGallery, photos, idQueen } = req.body
+    const nameQueen = await Queen.findById(idQueen)
+
     const newGallery = new Galleries({
       galleryName,
       coverPhotoGallery,
+      nameQueen: nameQueen.name,
       price,
-      photos
+      photos,
+      idQueen
     })
     await newGallery.save()
     res.json(`Gallery created successfully`)
@@ -23,5 +28,15 @@ const createGalleries = async(req, res) =>{
     })
   }
 }
+
+const getAllGalleries = async(req, res) => {
+  try {
+    const data = await Galleries.find()
+
+    res.status(200).json(data)
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}
        
-module.exports = { createGalleries }
+module.exports = { createGalleries, getAllGalleries }
