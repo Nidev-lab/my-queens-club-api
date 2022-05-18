@@ -4,15 +4,21 @@ const jwt = require("jsonwebtoken")
 const token_secret = process.env.TOKEN_SECRET
 
 const jwtValidator = async(req, res, next) => {
-  const { accessToken } = req.body
+  let accessToken = null
+  
+  if (req.body.accessToken) {
+    accessToken = req.body.accessToken;
+  } else {
+    accessToken = req.params.accessToken;
+  }
 
   try {
     const decode = jwt.verify(accessToken, token_secret)
-
+    
     if (decode) {
       return next()
     }
-
+    
     return res.status(404).json({
       message: "User Not found!"
     })
