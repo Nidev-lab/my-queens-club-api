@@ -4,7 +4,13 @@ const jwt = require("jsonwebtoken")
 const token_secret = process.env.TOKEN_SECRET
 
 const jwtValidator = async(req, res, next) => {
-  const { accessToken } = req.body
+  let accessToken = null
+
+  if (req.body) {
+    accessToken = req.body.AccessToken;
+  } else {
+    accessToken = req.params.AccessToken;
+  }
 
   try {
     const decode = jwt.verify(accessToken, token_secret)

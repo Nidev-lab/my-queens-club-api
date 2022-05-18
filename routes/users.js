@@ -6,7 +6,7 @@ const { validateEmail, validateUserName } = require('../helpers/validation');
 const { jwtValidator } = require('../middleware/jwt');
 
 route
-  .get('/', jwtValidator, getUsers)
+  .get('/:AccessToken', jwtValidator, getUsers)
 
 route
   .post('/',
