@@ -1,10 +1,11 @@
 const { Router } = require('express')
 const route = Router()
 const { body } = require('express-validator')
-const { createGalleries, getAllGalleries } = require('../controllers/galleries')
+const { createGalleries, getAllGalleries, getGallery } = require('../controllers/galleries')
 
 route
   .get('/', getAllGalleries)
+  .get('/:id', getGallery)
   .post('/',
     body('idQueen'),
     body('galleryName').trim().escape().isAlpha('es-ES', {ignore: ' '}).not().isEmpty().isLength({min: 3, max: 20}),

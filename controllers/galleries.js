@@ -38,5 +38,16 @@ const getAllGalleries = async(req, res) => {
     res.status(400).json(error)
   }
 }
+
+const getGallery = async (req, res) => {
+  const { id } = req.params
+  try {
+    const data = await Galleries.findById(id)
+
+    res.status(200).json(data)
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}
        
-module.exports = { createGalleries, getAllGalleries }
+module.exports = { createGalleries, getAllGalleries, getGallery }

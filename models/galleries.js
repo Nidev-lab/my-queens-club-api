@@ -4,7 +4,7 @@ const galleries = new Schema({
   idQueen: String,
   nameQueen: String,
   galleryName: String,
-  coverPhotoGallery: [String],
+  coverPhotoGallery: String,
   price: Number,
   photos: [String],
 })
