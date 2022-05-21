@@ -1,16 +1,17 @@
 const Carousel = require('../models/carousel')
 
 const createCarouselIamge = async(req, res) =>{
-  const { coverImage } = req.body
+  const { coverImageDesktop, coverImageMobile } = req.body
   try{
     const newPhoto = new Carousel({
-      coverImage
+      coverImageDesktop,
+      coverImageMobile
     })
     await newPhoto.save()
     res.json(`Photo created successfully`)
   } 
   catch(error){
-    return res.status(404).json({
+    return res.status(400).json({
       message: "Cannot create Photo"
     })
   }
@@ -22,17 +23,18 @@ const getCarouselIamge = async (req, res) => {
     res.status(200).json(carousel)
   }
   catch (error) {
-    return res.status(404).json({
+    return res.status(400).json({
       message: "Cannot found any Photo"
     })
   }
 }
 
 const editCarouselIamge = async (req, res) => {
-  const { coverImage } = req.body
+  const { coverImageDesktop, coverImageMobile } = req.body
   try {
     await Carousel.findByIdAndUpdate(req.params.carouselId, {
-      coverImage
+      coverImageDesktop,
+      coverImageMobile
     })
     res.json('Photo edited.')
   }
@@ -53,11 +55,11 @@ const deleteCarouselIamge = async (req, res) => {
         mensaje: "Photo deleted succefully!",
       })
     }
-    return res.status(404).json({
+    return res.status(400).json({
       mensaje: "Photo not found!",
     })
   } catch (error) {
-    return res.status(404).json({
+    return res.status(400).json({
       message: "Cannot delete Photo",
       error
     })
