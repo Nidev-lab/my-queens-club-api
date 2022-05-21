@@ -1,7 +1,8 @@
 const { Schema, model } = require('mongoose')
 
 const carousel = new Schema({
-  coverImage: String  
+  coverImageDesktop: String,
+  coverImageMobile: String
 })
 
 module.exports = model('Carousel', carousel)
