@@ -6,7 +6,7 @@ const { validateEmail, validateUserName } = require('../helpers/validation');
 const { jwtValidator } = require('../middleware/jwt');
 
 route
-  .get('/:accessToken', jwtValidator, getUsers)
+  .get('/', jwtValidator, getUsers)
 
 route
   .post('/',
@@ -21,6 +21,6 @@ route
     )
 
 route
-  .delete('/', jwtValidator, deleteUser)
+  .delete('/:id', jwtValidator, deleteUser)
 
 module.exports = route

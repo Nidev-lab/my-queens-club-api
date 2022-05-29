@@ -46,7 +46,7 @@ const getUsers = async (req, res) => {
 }
 
 const deleteUser = async (req, res) => {
-  const { id } = req.body
+  const { id } = req.params
   try {
     const user = await User.findOneAndDelete({ _id: id })
     
