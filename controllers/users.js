@@ -27,7 +27,7 @@ const createUser = async(req, res) =>{
     res.json(`User created successfully`)
   } 
   catch(error){
-    return res.status(404).json({
+    return res.status(400).json({
       message: "Cannot create user"
     })
   }
@@ -39,7 +39,7 @@ const getUsers = async (req, res) => {
     res.status(200).json(users)
   }
   catch (error) {
-    return res.status(404).json({
+    return res.status(400).json({
       mensaje: "Cannot found any user"
     })
   }
@@ -55,11 +55,12 @@ const deleteUser = async (req, res) => {
         mensaje: "User deleted succefully!",
       })
     }
-    return res.status(404).json({
+
+    return res.status(400).json({
       mensaje: "User not found!",
     })
   } catch (error) {
-    return res.status(404).json({
+    return res.status(400).json({
       message: "Cannot delete user",
       error
     })

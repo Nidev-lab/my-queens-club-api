@@ -1,19 +1,25 @@
 const User = require('../models/users')
 
-const validateEmail = async(email) => {
-  const isEmail = await User.findOne({email})
+const validateEmail = async(req, res, next) => {
+  const {email} = req.body
+  const isEmail = await User.findOne({ email })
 
   if (isEmail) {
-    throw new Error(`Algo salió mal`)
+    return res.json({email: {message: '* Este email ya se encuentra registrado', status: 401}})
   }
+  
+  next()
 }
 
-const validateUserName = async(userName) =>{
-  const isUserName = await User.findOne({userName})
+const validateUserName = async(req, res, next) =>{
+  const {userName} = req.body
+  const isUserName = await User.findOne({ userName })
 
   if(isUserName) {
-    throw new Error(`Algo salió mal`)
+    return res.json({userName: {message: '* Este nombre de usuario ya existe', status: 401}})
   }
+
+  next()
 }
 
 module.exports = { validateEmail, validateUserName }
