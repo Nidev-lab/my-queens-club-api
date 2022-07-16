@@ -24,7 +24,7 @@ const createUser = async(req, res) =>{
     newUser.password = bcrypt.hashSync(password, salt)
 
     await newUser.save()
-    res.json(`User created successfully`)
+    res.status(200).json({message: `User created successfully`, status: 200})
   } 
   catch(error){
     return res.status(400).json({

@@ -5,7 +5,7 @@ const validateEmail = async(req, res, next) => {
   const isEmail = await User.findOne({ email })
 
   if (isEmail) {
-    return res.json({email: {message: '* Este email ya se encuentra registrado', status: 401}})
+    return res.status(401).json({email: {message: '* Este email ya se encuentra registrado', status: 401}})
   }
   
   next()
@@ -16,7 +16,7 @@ const validateUserName = async(req, res, next) =>{
   const isUserName = await User.findOne({ userName })
 
   if(isUserName) {
-    return res.json({userName: {message: '* Este nombre de usuario ya existe', status: 401}})
+    return res.status(401).json({userName: {message: '* Este nombre de usuario ya existe', status: 401}})
   }
 
   next()
