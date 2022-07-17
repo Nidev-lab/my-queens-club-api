@@ -14,6 +14,7 @@ const login = async (req, res) => {
   }
   
   const userData = await userNameOrEmail(user)
+  console.log(userData)
 
   if (!userData) {
     res
@@ -24,7 +25,12 @@ const login = async (req, res) => {
 
   try {
     const match = await bcrypt.compare(password, userData.password)
-    const accessToken = jwt.sign({ userData }, token_secret, { expiresIn: '2h' })
+    const payload = {
+      userId: userData._id,
+      email: userData.email,
+    };
+
+    const accessToken = jwt.sign( payload, token_secret, { expiresIn: '2h' } )
   
     if (match) {
       res.status(200).json({

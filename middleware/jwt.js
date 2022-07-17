@@ -9,7 +9,8 @@ const jwtValidator = async(req, res, next) => {
 
   try {
     const decode = jwt.verify(accessToken, token_secret)
-    
+    req.userId = decode.userId;
+    req.userEmail = decode.email;
     if (decode) {
       return next()
     }
