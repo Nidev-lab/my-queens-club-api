@@ -14,7 +14,6 @@ const login = async (req, res) => {
   }
   
   const userData = await userNameOrEmail(user)
-  console.log(userData)
 
   if (!userData) {
     res
