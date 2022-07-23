@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const route = Router()
 const { body } = require('express-validator')
-const { createUser, deleteUser, getUsers } = require('../controllers/users');
+const { createUser, deleteUser, getUsers, editAccount } = require('../controllers/users');
 const { validateEmail, validateUserName } = require('../helpers/validation');
 const { jwtValidator } = require('../middleware/jwt');
 
@@ -22,5 +22,8 @@ route
 
 route
   .delete('/:id', jwtValidator, deleteUser)
+
+route
+  .patch('/', jwtValidator, editAccount)
 
 module.exports = route

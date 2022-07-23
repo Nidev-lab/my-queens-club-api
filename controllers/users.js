@@ -67,4 +67,18 @@ const deleteUser = async (req, res) => {
   }
 }
 
-module.exports = { createUser, getUsers, deleteUser }
+const editAccount = async (req, res) => {
+  const userId = req.userId;
+  const body = req.body;  
+  try{
+    const user = await User.findByIdAndUpdate({ _id: userId }, body);
+    res.status(200).json({message: `User update successfully`, status: 200})
+  } 
+  catch(error){
+    return res.status(400).json({
+      message: "Cannot update user"
+    })
+  }
+}
+
+module.exports = { createUser, getUsers, deleteUser, editAccount }
